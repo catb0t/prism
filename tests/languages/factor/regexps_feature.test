@@ -1,16 +1,20 @@
 R/  abcde/i-r
-R/
-abcde?.+\?\*\+/
+R/  abcde?.+\?\*\+/
 R/ \\/
 R/ \//idmsr
 R/ \/idmsr/
+
+! bad:
+R/	/
+R/
+/
 
 -----------------------------
 
 [
 	[ "regexp", [ "R/  abcde/", [ "operator", "i-r" ] ] ],
 	[ "regexp", [
-		"R/\r\nabcde",
+		"R/  abcde",
 		[ "keyword", "?" ],
 		[ "keyword", "." ],
 		[ "keyword", "+" ],
@@ -21,7 +25,12 @@ R/ \/idmsr/
 	] ],
 	[ "regexp", [ "R/ ", [ "variable", "\\\\"], "/"] ],
 	[ "regexp", [ "R/ ", [ "variable", "\\/" ], "/", [ "operator", "idmsr" ] ] ],
-	[ "regexp", [ "R/ ", [ "variable", "\\/" ], "idmsr/" ] ]
+	[ "regexp", [ "R/ ", [ "variable", "\\/" ], "idmsr/" ] ],
+	[ "comment", [ "! bad:" ] ],
+	[ "normal-word", "R/" ],
+	[ "math-builtin", "/" ],
+	[ "normal-word", "R/" ],
+	[ "math-builtin", "/" ]
 ]
 
 -----------------------------

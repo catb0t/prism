@@ -2,7 +2,9 @@
 :: ; ! ; is not a word name
 :: ;a ! ;a is a word name
 USING: a b c ;
+USING:	a ;
 USE: a
+USE:	a
 IN: a.b
 CHAR: a
 #: a
@@ -34,7 +36,12 @@ GENERIC#: a
 		]
 	],
 	[ "semicolon-or-setlocal", ";" ],
+	[ "normal-word", "USING:" ],
+	[ "normal-word", "a" ],
+	[ "semicolon-or-setlocal", ";" ],
 	[ "colon-syntax", "USE: a" ],
+	[ "normal-word", "USE:" ],
+	[ "normal-word", "a" ],
 	[ "colon-syntax", "IN: a.b" ],
 	[ "colon-syntax", "CHAR: a" ],
 	[ "normal-word", "#:" ],

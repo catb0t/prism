@@ -1,8 +1,8 @@
 a! ! word
 !a ! word
 ! comment
-!	bad
-! 	fine
+!	tab bad
+! 	tab ok after space
 ! "also a comment"
 ! : ( -- ) ;
 ! ! leading comment-like token
@@ -12,6 +12,8 @@ words blah ! comment after code on a line
 ![[ comment ]]
 "![[ string ]]"
 ![[ "comment" ]]
+![[	tab bad ]]
+![[ 	tab ok after space ]]
 
 ![[ comment]]
 ![==[ comment ]==]
@@ -24,6 +26,7 @@ ment */
 /* com
 ment*/
 /*word */
+/*	bad */
 
 /* "comment" */
 "/* "strings" */"
@@ -38,8 +41,10 @@ ment*/
 	[ "comment", [ "! word" ] ],
 	[ "comment", [ "! comment" ] ],
 
-	[ "normal-word", "!" ], [ "normal-word", "bad" ],
-	[ "comment", [ "! \tfine" ] ],
+	[ "normal-word", "!" ],
+	[ "normal-word", "tab" ],
+	[ "normal-word", "bad" ],
+	[ "comment", [ "! \ttab ok after space" ] ],
 
 	[ "comment", [ "! \"also a comment\"" ] ],
 	[ "comment", [ "! : ( -- ) ;" ] ],
@@ -52,6 +57,12 @@ ment*/
 	[ "comment", [ "![[ comment ]]" ] ],
 	[ "string", [ "\"![[ string ]]\"" ] ],
 	[ "comment", [ "![[ \"comment\" ]]" ] ],
+	[ "normal-word", "![[" ],
+	[ "normal-word", "tab" ],
+	[ "normal-word", "bad" ],
+	[ "normal-word", "]]" ],
+	[ "comment", [ "![[ \ttab ok after space ]]" ] ],
+
 	[ "comment", [ "![[ comment]]" ] ],
 	[ "comment", [ "![==[ comment ]==]" ] ],
 	[ "comment", [ "![==[ comment]==]" ] ],
@@ -61,10 +72,17 @@ ment*/
 	[ "normal-word", "![=======[" ],
 	[ "normal-word", "words" ],
 	[ "normal-word", "]=======]" ],
+
 	[ "comment", [ "/* com\r\nment */" ] ],
 	[ "comment", [ "/* com\r\nment*/" ] ],
+
 	[ "normal-word", "/*word" ],
  	[ "normal-word", "*/" ],
+
+	[ "conventionally-named-word", "/*" ],
+	[ "normal-word", "bad" ],
+	[ "normal-word", "*/" ],
+
 	[ "comment", ["/* \"comment\" */"] ],
 	[ "string", ["\"/* \""] ],
 	"strings",

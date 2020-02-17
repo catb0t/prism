@@ -8,6 +8,8 @@
 	};
 
 	var factor = {
+		// 'invalid': /[\f\t\v]/,
+
 		'comment': [
 			{
 				// ! single-line exclamation point comments with whitespace after/around the !
@@ -19,14 +21,14 @@
 			/* from basis/multiline: */
 			{
 				// /* comment */, /* comment*/
-				pattern: /(^|\s)\/\*\s[\s\S]*?\*\/(?=\s|$)/,
+				pattern: /(^|\s)\/\*[\n ][\s\S]*?\*\/(?=\s|$)/,
 				lookbehind: true,
 				greedy: true,
 				inside: comment_inside
 			},
 			{
 				// ![[ comment ]] , ![===[ comment]===]
-				pattern: /(^|\s)!\[(={0,6})\[\s[\s\S]*?\]\2\](?=\s|$)/,
+				pattern: /(^|\s)!\[(={0,6})\[[\n ][\s\S]*?\]\2\](?=\s|$)/,
 				lookbehind: true,
 				greedy: true,
 				inside: comment_inside
@@ -84,7 +86,7 @@
 
 		// R/ regexp?\/\\/
 		'regexp': {
-			pattern: /(^|\s)R\/\s+(?:\\\S|[^\\/])*\/(?:[idmsr]*|[idmsr]+-[idmsr]+)(?=\s|$)/,
+			pattern: /(^|\s)R\/ (?:\\\S|[^\t\\/])*\/(?:[idmsr]*|[idmsr]+-[idmsr]+)(?=\s|$)/,
 			lookbehind: true,
 			alias: 'number',
 			inside: {
@@ -104,7 +106,7 @@
 
 		// SBUF" asd", URL" ://...", P" /etc/"
 		'custom-string': {
-			pattern: /(^|\s)[A-Z0-9\-]+"\s(?:\\\S|[^"\\])*"/,
+			pattern: /(^|\s)[A-Z0-9\-]+"[\n ](?:\\\S|[^"\\])*"/,
 			lookbehind: true,
 			greedy: true,
 			alias: 'string',
@@ -116,7 +118,7 @@
 		'multiline-string': [
 			{
 				// STRING: name \n content \n ; -> CONSTANT: name "content" (symbol)
-				pattern: /(^|\s)STRING:\s+\S+(?:\n|\r\n).*(?:\n|\r\n)\s*;(?=\s|$)/,
+				pattern: /(^|\s)STRING:[\n ]+\S+(?:\n|\r\n).*(?:\n|\r\n)\s*;(?=\s|$)/,
 				lookbehind: true,
 				greedy: true,
 				alias: 'string',
@@ -132,7 +134,7 @@
 			},
 			{
 				// HEREDOC: marker \n content \n marker ; -> "content" (immediate)
-				pattern: /(^|\s)HEREDOC:\s+\S+(?:\n|\r\n).*(?:\n|\r\n)\s*\S+(?=\s|$)/,
+				pattern: /(^|\s)HEREDOC:[\n ]+\S+(?:\n|\r\n).*(?:\n|\r\n)\s*\S+(?=\s|$)/,
 				lookbehind: true,
 				greedy: true,
 				alias: 'string',
@@ -140,7 +142,7 @@
 			},
 			{
 				// [[ string ]], [==[ string]==]
-				pattern: /(^|\s)\[(={0,6})\[\s[\s\S]*?\]\2\](?=\s|$)/,
+				pattern: /(^|\s)\[(={0,6})\[[\n ][\s\S]*?\]\2\](?=\s|$)/,
 				lookbehind: true,
 				greedy: true,
 				alias: 'string',
@@ -149,7 +151,7 @@
 		],
 
 		'special-using': {
-			pattern: /(^|\s)USING:(?:\s\S+)*(?=\s+;(?:\s|$))/,
+			pattern: /(^|\s)USING:(?:[\n ]+\S+)*(?=[\n ]+;(?:\s|$))/,
 			lookbehind: true,
 			alias: 'function',
 			inside: {
@@ -271,7 +273,7 @@
 		},
 
 		'colon-syntax': {
-			pattern: /(^|\s)(?:[A-Z0-9\-]+#?)?:{1,2}\s+(?:;\S+|(?!;)\S+)(?=\s|$)/,
+			pattern: /(^|\s)(?:[A-Z0-9\-]+#?)?:{1,2}[\n ]+(?:;\S+|(?!;)\S+)(?=\s|$)/,
 			lookbehind: true,
 			greedy: true,
 			alias: 'function'

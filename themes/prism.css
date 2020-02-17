@@ -66,6 +66,11 @@ pre[class*="language-"] {
 	white-space: normal;
 }
 
+.token.invalid {
+	background-color: rgba(255, 0, 0, 0.5);
+	color: black;
+}
+
 .token.comment,
 .token.prolog,
 .token.doctype,
